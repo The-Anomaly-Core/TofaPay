@@ -6,13 +6,18 @@ class UserService {
   async getAllUsers(): Promise<User[]> {
     try {
       const snapshot = await admin.firestore().collection("users").get();
+      if (snapshot.empty) {
+        console.warn("No users found in Firestore.");
+        return [];
+      }
+
       const users: User[] = [];
-      snapshot.docs.map((doc) => {
+      snapshot.docs.forEach((doc) => {
         users.push({ id: doc.id, ...doc.data() } as User);
       });
+
       return users;
     } catch (error) {
-      console.log("Error fetching users from Firestore", error);
       logger.error("Error fetching users from Firestore", { error });
       throw error;
     }

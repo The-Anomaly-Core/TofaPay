@@ -6,8 +6,12 @@ class CatalogService {
   async getAllServices(): Promise<Service[]> {
     try {
       const snapshot = await admin.firestore().collection("services").get();
+      if (snapshot.empty) {
+        console.warn("No services found in Firestore.");
+        return [];
+      }
       const services: Service[] = [];
-      snapshot.docs.map((doc) => {
+      snapshot.docs.forEach((doc) => {
         services.push({ id: doc.id, ...doc.data() } as Service);
       });
       return services;

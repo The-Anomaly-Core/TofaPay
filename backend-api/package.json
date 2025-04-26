@@ -19,12 +19,14 @@
     "express-rate-limit": "^7.5.0",
     "firebase-admin": "^13.3.0",
     "helmet": "^8.1.0",
+    "morgan": "^1.10.0",
     "winston": "^3.17.0",
     "zod": "^3.24.3"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",
     "@types/express": "^5.0.1",
+    "@types/morgan": "^1.9.9",
     "@types/node": "^22.14.1",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.8.3"
